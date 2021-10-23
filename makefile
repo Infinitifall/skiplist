@@ -19,6 +19,8 @@ skiplist.o: skiplist.c skiplist.h
 	$(CC) $(CFLAGS) -c skiplist.c skiplist.h
 
 clean:
+	$(RM) example_cli
+	$(RM) example_simple
 	$(RM) example_cli.o
 	$(RM) example_simple.o
 	$(RM) skiplist.o
