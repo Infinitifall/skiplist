@@ -125,7 +125,14 @@ void list_insert(SkipList *l, int data) {
     // increase size of head_array by a set amount if necessary (doubling size is unnecessary
     // because height is not expected to exceed log(n))
     while (l->max_height < n->height) {
-        l->head_array = realloc(l->head_array, CL_STARTER_HEIGHT * sizeof(Node*) +  sizeof(*l->head_array));
+        Node **temp = calloc(l->max_height + CL_STARTER_HEIGHT, sizeof(Node*));
+        for (int i = 0; i < l->max_height; i++) {
+            if (l->head_array[i] != NULL) {
+                temp[i] = l->head_array[i];
+            }
+        }
+        
+        l->head_array = temp;
         l->max_height += CL_STARTER_HEIGHT;
     }
 
