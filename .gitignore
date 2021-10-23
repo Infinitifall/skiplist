@@ -22,3 +22,6 @@
 
 # Other files
 main_example
+
+#vscode config files
+/.vscode/*
