@@ -136,7 +136,6 @@ void list_insert(SkipList *l, int data) {
         if (next == NULL) {
             if (n->height - 1 >= curr_height) {
                 l->head_array[curr_height] = n;
-                printf("%p\n", l->head_array[curr_height]);
             }
 
             curr_height -=1;
@@ -176,6 +175,7 @@ void list_insert(SkipList *l, int data) {
             }
             
             curr_height -= 1;
+
         } else {
             curr = next;
         }
