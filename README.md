@@ -1,15 +1,24 @@
 # SkipList
-C implementation of [skip lists](https://en.wikipedia.org/wiki/Skip_list), a probabilistic data structure that is efficient, compact and concurrency friendly.
+C implementation of [skip list](https://en.wikipedia.org/wiki/Skip_list), a probabilistic data structure that is efficient, compact and concurrency friendly.
 
-## Use skip lists in your project
-Add the files [skiplist.c](src/skiplist.c), [skiplist.h](src/skiplist.h) to your project and `#include` the header file where required. All functions have comment docs and only rely on standard libraries `stdin.h` and `stdlib.h`.
+## Features
+- O(logn) insertion, deletion and search, O(1) predecessor and successor, O(n) space
+- Header file [skiplist.h](skiplist.h) provides a simple interface
+- All functions have docstrings
 
-## Example usage
-Clone the repository, compile and run the [example program](main_example.c) provided
+## Use skip lists in your own project
+- Add files [skiplist.c](skiplist.c), [skiplist.h](skiplist.h) to your project
+- `#include "<path-to-skiplist>/skiplist.h"` where necessary
+
+## Examples
+Compile and run the example programs provided
 
 ```
-git clone https://github.com/Infinitifall/skiplist.git
-cd skiplist
-make
-./main_example
+make example_simple
+./example_simple
+```
+
+```
+make example_cli
+./example_cli
 ```

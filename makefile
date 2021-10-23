@@ -1,19 +1,24 @@
 CC=gcc
 CFLAGS = -g -Wall
-TARGET = main_example
 
-all: main_example
+all: example_simple example_cli
 
-main_example: main_example.o skiplist.o
-	$(CC) $(CFLAGS) -o $(TARGET) main_example.o skiplist.o
+example_simple: example_simple.o skiplist.o
+	$(CC) $(CFLAGS) -o example_simple example_simple.o skiplist.o
 
-main_example.o: main_example.c src/skiplist.h
-	$(CC) $(CFLAGS) -c main_example.c src/skiplist.h
+example_cli: example_cli.o skiplist.o
+	$(CC) $(CFLAGS) -o example_cli example_cli.o skiplist.o
 
-skiplist.o: src/skiplist.c src/skiplist.h
-	$(CC) $(CFLAGS) -c src/skiplist.c src/skiplist.h
+example_simple.o: example_simple.c skiplist.h
+	$(CC) $(CFLAGS) -c example_simple.c skiplist.h
+
+example_cli.o: example_cli.c skiplist.h
+	$(CC) $(CFLAGS) -c example_cli.c skiplist.h
+
+skiplist.o: skiplist.c skiplist.h
+	$(CC) $(CFLAGS) -c skiplist.c skiplist.h
 
 clean:
-	$(RM) $(TARGET)
-	$(RM) main_example.o
+	$(RM) example_cli.o
+	$(RM) example_simple.o
 	$(RM) skiplist.o

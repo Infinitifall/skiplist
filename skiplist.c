@@ -16,7 +16,7 @@ int generate_height() {
 }
 
 
-Node* create_node(int data) {
+Node* skiplist_create_node(int data) {
     Node *n = calloc(1, sizeof(Node));
     n->data = data;
     n->height = generate_height();
@@ -26,14 +26,14 @@ Node* create_node(int data) {
 }
 
 
-void free_node(Node *n) {
+void skiplist_free_node(Node *n) {
     free(n->succ_array);
     free(n->pred_array);
     free(n);
 }
 
 
-SkipList* create_list() {
+SkipList* skiplist_create() {
     SkipList *l = calloc(1, sizeof(SkipList));
     // create head_array of size CL_STARTER_HEIGHT which we can expand later
     l->head_array = calloc(CL_STARTER_HEIGHT, sizeof(Node*));
@@ -42,11 +42,11 @@ SkipList* create_list() {
 }
 
 
-void free_list(SkipList *l) {
+void skiplist_free(SkipList *l) {
     Node *curr = l->head_array[0];
     while(curr != NULL) {
         Node *next = curr->succ_array[0];
-        free_node(curr);
+        skiplist_free_node(curr);
         curr = next;
     }
 
@@ -55,17 +55,25 @@ void free_list(SkipList *l) {
 }
 
 
-void list_print(SkipList *l) {
-    Node *curr = l->head_array[0];
+void skiplist_print(SkipList *l, int level) {
+    if ((level  > l->max_height) || (level < 0)) {
+        printf("No elements!");
+    }
+
+    Node *curr = l->head_array[level];
     while(curr != NULL) {
         printf("%20d, %2d\n", curr->data, curr->height);
-        curr = curr->succ_array[0];
+        curr = curr->succ_array[level];
     }
 }
 
 
-void list_print_pretty(SkipList *l) {
-    Node *curr = l->head_array[0];
+void skiplist_print_pretty(SkipList *l, int level) {
+    if ((level  > l->max_height) || (level < 0)) {
+        printf("No elements!");
+    }
+    
+    Node *curr = l->head_array[level];
     while(curr != NULL) {
         printf("%20d, ", curr->data);
         for (int i = 0; i < curr->height; i++) {
@@ -73,12 +81,12 @@ void list_print_pretty(SkipList *l) {
         }
 
         printf("\n");
-        curr = curr->succ_array[0];
+        curr = curr->succ_array[level];
     }
 }
 
 
-Node* list_search(SkipList *l, int data) {
+Node* skiplist_search(SkipList *l, int data) {
     // check levels in head_array from top to bottom
     int curr_height = l->max_height;
     while(curr_height >= 0) {
@@ -119,8 +127,8 @@ Node* list_search(SkipList *l, int data) {
 }
 
 
-void list_insert(SkipList *l, int data) {
-    Node *n = create_node(data);
+void skiplist_insert(SkipList *l, int data) {
+    Node *n = skiplist_create_node(data);
     
     // increase size of head_array by a set amount if necessary (doubling size is unnecessary
     // because height is not expected to exceed log(n))
@@ -190,9 +198,9 @@ void list_insert(SkipList *l, int data) {
 }
 
 
-void list_remove(SkipList *l, int data) {
+void skiplist_remove(SkipList *l, int data) {
     // get pointer to the element using list_search
-    Node *curr = list_search(l, data);
+    Node *curr = skiplist_search(l, data);
 
     if(curr == NULL) {
         return;
@@ -223,6 +231,21 @@ void list_remove(SkipList *l, int data) {
         }
     }
 
-    free_node(curr);
+    skiplist_free_node(curr);
+}
+
+
+Node* skiplist_nodePred(Node *n, int level) {
+    return n->pred_array[level];
+}
+
+
+Node* skiplist_nodeSucc(Node *n, int level) {
+    return n->pred_array[level];
+}
+
+
+int skiplist_nodeHeight(Node *n) {
+    return n->height;
 }
 

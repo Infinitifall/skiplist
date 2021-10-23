@@ -21,7 +21,8 @@
 *.out
 
 # Other files
-main_example
+example_cli
+example_simple
 
 #vscode config files
 /.vscode/*
