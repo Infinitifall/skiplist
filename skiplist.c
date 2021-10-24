@@ -243,7 +243,7 @@ Node* skiplist_nodePred(Node *n, int level) {
 
 
 Node* skiplist_nodeSucc(Node *n, int level) {
-    return n->pred_array[level];
+    return n->succ_array[level];
 }
 
 
