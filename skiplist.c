@@ -56,21 +56,23 @@ void skiplist_free(SkipList *l) {
 
 
 void skiplist_print(SkipList *l, int level) {
-    if ((level  > l->max_height) || (level < 0)) {
-        printf("No elements!");
+    if ((level >= l->max_height) || (level < 0)) {
+        printf("No elements!\n");
+        return;
     }
 
     Node *curr = l->head_array[level];
     while(curr != NULL) {
         printf("%20d, %2d\n", curr->data, curr->height);
-        curr = curr->succ_array[level];
+        curr = skiplist_nodeSucc(curr, level);
     }
 }
 
 
 void skiplist_print_pretty(SkipList *l, int level) {
-    if ((level  > l->max_height) || (level < 0)) {
-        printf("No elements!");
+    if ((level >= l->max_height) || (level < 0)) {
+        printf("No elements!\n");
+        return;
     }
     
     Node *curr = l->head_array[level];
