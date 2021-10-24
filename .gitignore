@@ -20,9 +20,9 @@
 *.exe
 *.out
 
-# Other files
-example_cli
-example_simple
+# Dotfiles
+/.*/*
 
-#vscode config files
-/.vscode/*
+# Project specific files
+example_simple
+example_cli

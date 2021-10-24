@@ -53,7 +53,7 @@ Description:
     a successively lower number of elements
 
 Inputs:
-    SkipList *l : the list
+    SkipList *l
 */
 void skiplist_print(SkipList *l, int level);
 
